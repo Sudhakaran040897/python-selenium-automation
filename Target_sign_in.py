@@ -74,12 +74,12 @@ try:
     driver.find_element(By.XPATH, "//a[@data-test='@web/AccountLink']").click()
     sleep(2)
 
-    # Step 3: Click SignIn from side navigation
+
     driver.find_element(By.XPATH, "//button[@type='button' and @data-test='accountNav-signIn']").click()
     sleep(2)
 
-    # Step 4: Verify SignIn page opened
-    # Verify "Sign into your Target account" text is shown
+
+
     expected_result= 'Found Sign into your Target account and Signin with password'
     actual = driver.find_element(By.XPATH, "//h1/span[contains(text(), 'Sign into your Target account')]").text
     actual_1 =driver.find_element(By.XPATH, "//button/span[contains(text(),'Sign in with password')]").text
