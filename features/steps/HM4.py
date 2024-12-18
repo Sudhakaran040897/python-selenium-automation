@@ -1,5 +1,5 @@
 from lib2to3.fixes.fix_input import context
-
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from behave import given, when, then
 from time import sleep
@@ -13,8 +13,8 @@ def open_main(context):
 @when('Search for {product}')
 def search_product(context, product):
     context.driver.find_element(By.ID, 'search').send_keys(product)
-    context.driver.find_element(By.XPATH, "//button[@data-test='@web/Search/SearchButton']").click()
-    sleep(5)
+    Search_button = context.driver.find_element(By.XPATH, "//button[@data-test='@web/Search/SearchButton']")
+    context.driver.wait.until(EC.element_to_be_clickable(Search_button)).click()
 
 
 @then('Verify search results shown')
@@ -41,28 +41,25 @@ def verify_header_links_amount(context, expected_amount):
 
 @when('Add the toy to cart')
 def Add_to_cart(context):
-    toy_element = context.driver.find_element(By.CSS_SELECTOR, "[aria-label='Add McFarlane Toys DC Comics Jokerized Scarecrow Action Figure (Target Exclusive) to cart']")
-    sleep(10)
-    toy_element.click()
+    toy_element = context.driver.find_element(By.CSS_SELECTOR,"[data-focusid*='89198670']")
+    context.driver.wait.until(EC.element_to_be_clickable(toy_element)).click()
     add_to_cart_button = context.driver.find_element(By.CSS_SELECTOR, "[data-test='shippingButton']")
-    add_to_cart_button.click()
-    sleep(3)
+    context.driver.wait.until(EC.element_to_be_clickable(add_to_cart_button)).click()
 
 
 @when('Decline protection')
 def Decline_protection(context):
     Decline_protection = context.driver.find_element(By.CSS_SELECTOR, "[data-test='espDrawerContent-declineCoverageButton']")
-    Decline_protection.click()
-    sleep(10)
+    context.driver.wait.until(EC.element_to_be_clickable(Decline_protection)).click()
+
 
 @then("I should see the product in my cart")
 def cart(context):
     add_cart = context.driver.find_element(By.CSS_SELECTOR, "[data-test='@web/CartIcon']")
-    add_cart.click()
-    sleep(10)
+    context.driver.wait.until(EC.element_to_be_clickable(add_cart)).click()
     click_total = context.driver.find_element(By.CSS_SELECTOR, "[class*='styles_buttonEnabledMenu']")
-    click_total.click()
-    sleep(5)
+    context.driver.wait.until(EC.element_to_be_clickable(click_total)).click()
+
 
 
 @then("Can see the total price")
