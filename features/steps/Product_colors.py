@@ -4,7 +4,7 @@ from time import sleep
 
 
 COLOR_OPTIONS = (By.CSS_SELECTOR, "div[aria-label='Carousel'] li img")
-SELECTED_COLOR = (By.CSS_SELECTOR, "[class*='h-padding-a-none h-padding-b-tiny'] div")
+SELECTED_COLOR = (By.CSS_SELECTOR, '[data-module-type="ProductDetailVariationSelector"] div:nth-child(3) ul')
 
 
 

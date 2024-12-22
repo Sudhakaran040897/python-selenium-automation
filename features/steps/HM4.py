@@ -1,27 +1,26 @@
-from lib2to3.fixes.fix_input import context
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from behave import given, when, then
-from time import sleep
 
+
+
+
+CART_ICON = (By.CSS_SELECTOR, "[data-test='@web/CartIcon']")
 
 @given('Open target main page')
 def open_main(context):
-    context.driver.get('https://www.target.com/')
+    context.app.main_page.open_main()
 
 
 @when('Search for {product}')
 def search_product(context, product):
-    context.driver.find_element(By.ID, 'search').send_keys(product)
-    Search_button = context.driver.find_element(By.XPATH, "//button[@data-test='@web/Search/SearchButton']")
-    context.driver.wait.until(EC.element_to_be_clickable(Search_button)).click()
+    context.app.header.search_product(product)
 
 
-@then('Verify search results shown')
-def verify_search_results(context):
-    expected_result = 'tea'
-    actual_result = context.driver.find_element(By.XPATH, "//div[@data-test='resultsHeading']").text
-    assert expected_result in actual_result, f'Expected text {expected_result} not in actual {actual_result}'
+@then('Verify search results shown for {product}')
+def verify_search_results(context, product):
+    context.app.search_results_page.verify_search_results(product)
+
 
 
 @given('Open target circle page')
