@@ -1,4 +1,4 @@
-from asyncio import sleep
+from time import sleep
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from behave import given, when, then
@@ -23,19 +23,26 @@ def login_page(context):
     login_submit = context.driver.find_element(By.CSS_SELECTOR, "[class='login-button w-button']")
     context.driver.wait.until(EC.element_to_be_clickable(login_submit)).click()
 
+    sleep(5)
+
 @then('Click on “settings” at the left side menu.')
 def settings_menu(context):
     settings = context.driver.find_element(By.XPATH, "//div[@class='menu-button-text' and text()='Settings']")
-    settings.click()
+    context.driver.wait.until(EC.element_to_be_clickable(settings)).click()
+
+    sleep(5)
+
 
 @then('Click on the verification option.')
 def verification_option(context):
-    verification_page = context.driver.find_element(By.CSS_SELECTOR, "[href='/verification/step-0']").click()
+    verification_page = context.driver.find_element(By.CSS_SELECTOR, "[href='/verification/step-0']")
+    context.driver.wait.until(EC.element_to_be_clickable(verification_page)).click()
 
 @then('Verify the right page opens.')
 def verify_right_page(context):
-        Verification_page_valid = context.driver.find_element(By.CSS_SELECTOR, "[class='lotion-your-h3']")
+        Verification_page_valid = context.driver.find_element(By.CSS_SELECTOR, "[class='description-text']")
         print(f"verification page: {Verification_page_valid.text}")
+        sleep(5)
 
 
 @then('Verify “upload image” and “Next step” buttons are available.')
