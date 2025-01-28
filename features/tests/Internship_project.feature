@@ -4,7 +4,7 @@ Feature:Create the test case
 
   Scenario:User can filter by Presale
     Given Open the main page
-    When  Log in to the page
+    When  the user logs in with valid credentials
     Then Click on “settings” at the left side menu.
     And Click on the verification option.
     Then Verify the right page opens.

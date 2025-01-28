@@ -8,29 +8,16 @@ from behave import given, when, then
 def main_page(context):
     context.app.internship_page.main_url()
 
-@when('Log in to the page')
-def login_page(context):
-    Login_user = context.driver.find_element(By.CSS_SELECTOR, "[class*='button-hero gray w-inline-block']").click()
-
-    email_input = context.driver.find_element(By.CSS_SELECTOR, "[wized='emailInput']")  # Update with the actual selector
-    email_input.send_keys("sreekar.velluri@gmail.com")
-    context.driver.wait.until(EC.element_to_be_clickable(email_input)).click()
-
-    password_input = context.driver.find_element(By.CSS_SELECTOR,"[wized='passwordInput']")
-    password_input.send_keys("Deadshotcrazy1@")
-    context.driver.wait.until(EC.element_to_be_clickable(password_input)).click()
-
-    login_submit = context.driver.find_element(By.CSS_SELECTOR, "[class='login-button w-button']")
-    context.driver.wait.until(EC.element_to_be_clickable(login_submit)).click()
-
-    sleep(5)
+@when("the user logs in with valid credentials")
+def step_user_logs_in(context):
+    context.main_page.login("sreekar.velluri@gmail.com", "Deadshotcrazy1@")
 
 @then('Click on “settings” at the left side menu.')
 def settings_menu(context):
-    settings = context.driver.find_element(By.XPATH, "//div[@class='menu-button-text' and text()='Settings']")
-    context.driver.wait.until(EC.element_to_be_clickable(settings)).click()
+    context.app.settings_menu.open_settings_page()
 
     sleep(5)
+
 
 
 @then('Click on the verification option.')
