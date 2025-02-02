@@ -1,11 +1,11 @@
-from pages.Internship_page import InternshipPage
+from pages.internship_page import InternshipPage
 from pages.base_page import BasePage
 from pages.cart_message import Cart
 from pages.header import Header
 from pages.main_page import MainPage
 from pages.search_results_page import SearchResultsPage
-from pages.settings_menu import SettingsMenu
-
+from pages.login_page import LoginPage
+from pages.settings_page import SettingsPage
 
 class Application:
 
@@ -17,6 +17,8 @@ class Application:
         self.search_results_page = SearchResultsPage(driver)
         self.cart = Cart(driver)
         self.internship_page = InternshipPage(driver)
-        self.settings_menu = SettingsMenu(driver)
+        self.login_page = LoginPage(driver)
+        self.settings_page = SettingsPage(driver)
+
 
 
