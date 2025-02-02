@@ -1,6 +1,7 @@
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from behave import given, when, then
+from time import sleep
 
 
 
@@ -18,12 +19,14 @@ def login_page(context):
 @when('the user clicks on "settings" in the left menu')
 def step_user_clicks_settings(context):
     context.app.settings_page.open_settings()
+    sleep(5)
 
 
 
 @when('the user clicks on the "verification" option')
 def step_user_clicks_verification(context):
     context.app.settings_page.open_verification()
+    sleep(5)
 
 
 @then("the verification page should open")
